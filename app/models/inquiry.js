@@ -5,7 +5,7 @@ const inquirySchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  body: {
+  content: {
     type: String,
     required: true
   },

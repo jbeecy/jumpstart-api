@@ -34,7 +34,13 @@ router.get('/inquiries', requireToken, (req, res, next) => {
 
 // SHOW
 // GET/inquiries/:id
-// not sure that I will use this for this application, will keep this here just in case I decide otherwise
+router.get('/inquiries/:id', requireToken, (req, res, next) => {
+  const id = req.params.id
+  Inquiry.find({ owner: req.user.id, _id: id })
+    .then(handle404)
+    .then((inquiry) => res.status(200).json({ inquiry: inquiry }))
+    .catch(next)
+})
 
 // CREATE
 // POST /inquiries

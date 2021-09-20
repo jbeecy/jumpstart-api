@@ -36,8 +36,9 @@ router.get('/inquiries/', requireToken, (req, res, next) => {
 // GET/inquiries/:id
 router.get('/inquiries/:id', requireToken, (req, res, next) => {
   const id = req.params.id
-  Inquiry.find({ owner: req.user.id, _id: id })
+  Inquiry.findById(id)
     .then(handle404)
+    .then(inquiry => requireOwnership(req, inquiry))
     .then((inquiry) => res.status(200).json({ inquiry: inquiry }))
     .catch(next)
 })

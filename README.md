@@ -1,124 +1,72 @@
 [![General Assembly Logo](https://camo.githubusercontent.com/1a91b05b8f4d44b5bbfb83abac2b0996d8e26c92/687474703a2f2f692e696d6775722e636f6d2f6b6538555354712e706e67)](https://generalassemb.ly/education/web-development-immersive)
 
-### Routing Directory
+# Important Links
 
-| Verb   | URI Pattern            | Controller#Action |
-|--------|------------------------|-------------------|
-| POST   | `/sign-up`             | `users#signup`    |
-| POST   | `/sign-in`             | `users#signin`    |
-| PATCH  | `/change-password/` | `users#changepw`  |
-| DELETE | `/sign-out/`        | `users#signout`   |
+[Deployed Front End](https://jbeecy.github.io/jumpstart/)
 
-#### POST /sign-up
+[Back end Heroku Deployed](https://git.heroku.com/infinite-everglades-04366.git)
 
-Request:
+## Repository Links
 
-```sh
-curl --include --request POST http://localhost:4741/sign-up \
-  --header "Content-Type: application/json" \
-  --data '{
-    "credentials": {
-      "email": "an@example.email",
-      "password": "an example password",
-      "password_confirmation": "an example password"
-    }
-  }'
-```
+[Front End Repo](https://github.com/jbeecy/jumpstart)
 
-```sh
-curl-scripts/sign-up.sh
-```
+[Back End Repo](https://github.com/jbeecy/jumpstart-api)
 
-Response:
+## What is Jumpstart?
 
-```md
-HTTP/1.1 201 Created
-Content-Type: application/json; charset=utf-8
+JumpStart is an application where all developers, whether junior, mid-level, senior, etc, can come to post code, ask questions, share accomplishments, store important files, and talk to fellow developers. The premise of jumpstart is StackOverflow meats GitHub. 
 
-{
-  "user": {
-    "id": 1,
-    "email": "an@example.email"
-  }
-}
-```
+Users can sign up, or sign in if already signed up. Once logged it, users can change their password or sign out, as well as post "Inquiries". To create an inquiry, simply navigate to the 'Create Inquiry' section on the navbar. Once you have successfully created an inquiry, you will be redirected to the inquiries page where you can see all the inquiries that have been posted.
 
-#### POST /sign-in
+Once you have posted your inquiry, you are able to update it or delete it. The update and delete buttons require ownership of the inquiry to perform either. You will get an error message if you attempt to update or delete something that isn't yours.
 
-Request:
+## Technologies used
 
-```sh
-curl --include --request POST http://localhost:4741/sign-in \
-  --header "Content-Type: application/json" \
-  --data '{
-    "credentials": {
-      "email": "an@example.email",
-      "password": "an example password"
-    }
-  }'
-```
+#### Front End:
+React, JavaScript, Bootstrap, HTML, CSS
 
-```sh
-curl-scripts/sign-in.sh
-```
+#### Back End:
+MongoDB, Mongoose, Express API, Passpost, BCryptjs
 
-Response:
+## Unsolved Problems
 
-```md
-HTTP/1.1 200 OK
-Content-Type: application/json; charset=utf-8
+As of now, there are still several features I am working on bringing to Jumpstart:
+1. Version 2 will allow users to comment on all posts, and markdown will be supported in inquiries as well as comments.
+2. Version 3 will allow users to post documents such as PDF files, users can also comment on these.
+3. Version 4 will allow users to direct message one another if they so decide, and will allow users to modify their own profile if they so decide.
 
-{
-  "user": {
-    "id": 1,
-    "email": "an@example.email",
-    "token": "33ad6372f795694b333ec5f329ebeaaa"
-  }
-}
-```
+### Planning and Problem Solving
 
-#### PATCH /change-password/
+After developing the idea for what my application would do, I generated user stories, wireframes, and an ERD to give myself a better vision for how to create the application.
 
-Request:
+The first technical piece I worked on was the back end, I wanted to make sure that all my API calls were successfully tested with curl scripts before moving on to the front end. After the back end was completed, I began working on the front end.
 
-```sh
-curl --include --request PATCH http://localhost:4741/change-password/ \
-  --header "Authorization: Bearer $TOKEN" \
-  --header "Content-Type: application/json" \
-  --data '{
-    "passwords": {
-      "old": "an example password",
-      "new": "super sekrit"
-    }
-  }'
-```
+My general approach for problem solving was "slow is smooth, smooth is fast" since I realized that most problems are simple fixes that were just missed the first time around.
 
-```sh
-TOKEN=33ad6372f795694b333ec5f329ebeaaa curl-scripts/change-password.sh
-```
+### Set-up and Installation
 
-Response:
+Setup and Installation is quite simple for jumpstart. Fork and clone both the front end and the back end repositories. Make sure you run `npm install` when you are in both directories. Once that is complete, change into a new branch that you create and you are all set! The npm packages for this application work on both Windows and Mac, so no further npm packages should be required for running the base version of the application. To run on local host (development environment) in your front end repository, run `npm run start` if on Mac, or `npm run start-windows` if on Windows. For the back end, `npm run server` or `npm run serve` works for both Windows and Mac.
 
-```md
-HTTP/1.1 204 No Content
-```
 
-#### DELETE /sign-out/
+### Catalog of Routes
 
-Request:
+#### Authentication:
+| Endpoint         | Component | `AuthenticatedRoute`? |
+|------------------|-------------------|-------|
+| `/sign-up`       | `SignUp`    | No |
+| `/sign-in`       | `SignIn`    | No |
+| `/change-password` | `ChangePassword`  | Yes |
+| `/sign-out`        | `SignOut`   | Yes |
 
-```sh
-curl --include --request DELETE http://localhost:4741/sign-out/ \
-  --header "Authorization: Bearer $TOKEN"
-```
+#### Inquiries (user posts):
+| Endpoint         | Component | `AuthenticatedRoute`? |
+|------------------|-------------------|-------|
+| `/create-inquiries`       | `CreateInquiries`    | Yes |
+| `/inquiries`       | `ShowInquiries`    | Yes |
+| `/inquiries/:id` | `UpdateInquiry`  | Yes |
+| `/inquiries/:id`        | `DeleteInquiry`   | Yes |
 
-```sh
-TOKEN=33ad6372f795694b333ec5f329ebeaaa curl-scripts/sign-out.sh
-```
 
-Response:
+### Entity Relationship Diagram
 
-```md
-HTTP/1.1 204 No Content
-```
-
+[Click here to view ERD](https://git.generalassemb.ly/ga-wdi-boston/capstone-project/files/3832/project.4.erd.pdf)

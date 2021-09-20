@@ -23,7 +23,7 @@ const router = express.Router()
 
 // INDEX
 // GET /inquiry
-router.get('/inquiries', requireToken, (req, res, next) => {
+router.get('/inquiries/', requireToken, (req, res, next) => {
   Inquiry.find()
     .then(inquiries => {
       return inquiries.map(inquiry => inquiry.toObject())
@@ -44,7 +44,7 @@ router.get('/inquiries/:id', requireToken, (req, res, next) => {
 
 // CREATE
 // POST /inquiries
-router.post('/inquiries', requireToken, (req, res, next) => {
+router.post('/inquiries/', requireToken, (req, res, next) => {
   req.body.inquiry.owner = req.user.id
   Inquiry.create(req.body.inquiry)
     .then(inquiry => {

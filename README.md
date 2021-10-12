@@ -66,6 +66,13 @@ Setup and Installation is quite simple for jumpstart. Fork and clone both the fr
 | `/inquiries/:id` | `UpdateInquiry`  | Yes |
 | `/inquiries/:id`        | `DeleteInquiry`   | Yes |
 
+#### Coming Soon! Comments (commenting on inquiries):
+| Endpoint         | Component | `AuthenticatedRoute`? |
+|------------------|-------------------|-------|
+| `/create-comment`       | `CreateComment`    | Yes |
+| `/inquiries`       | `ShowComments`    | Yes |
+| `/comments/:id` | `UpdateComment`  | Yes |
+| `/comments/:id`        | `DeleteComment`   | Yes |
 
 ### Entity Relationship Diagram
 
